@@ -17,7 +17,7 @@ val networkModule = module {
     single { createNetworkApi(get()) }
 }
 
-fun createNetworkApi(retrofit: Retrofit) = retrofit.create(CurrenciesNetworkService::class.java)
+fun createNetworkApi(retrofit: Retrofit): CurrenciesNetworkService = retrofit.create(CurrenciesNetworkService::class.java)
 
 fun createRetrofit(okHttpClient: OkHttpClient): Retrofit =
     Retrofit.Builder()
