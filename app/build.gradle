@@ -21,6 +21,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "API_KEY", "\"cf9fbdba4535926e9587a4cd63e37450\"")
+            buildConfigField("String", "API_ENDPOINT", "\"http://api.currencylayer.com\"")
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "API_KEY", "\"cf9fbdba4535926e9587a4cd63e37450\"")
+            buildConfigField("String", "API_ENDPOINT", "\"http://api.currencylayer.com\"")
         }
     }
 
@@ -83,7 +92,7 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$androidArchitectureVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$androidArchitectureVersion"
+    kapt "android.arch.lifecycle:compiler:$androidArchitectureVersion"
     testImplementation "android.arch.core:core-testing:$androidArchitectureVersion"
 
     //Kotlin Coroutines
