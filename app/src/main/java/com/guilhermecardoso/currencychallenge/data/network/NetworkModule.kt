@@ -1,8 +1,6 @@
-package com.guilhermecardoso.currencychallenge.data
+package com.guilhermecardoso.currencychallenge.data.network
 
 import com.guilhermecardoso.currencychallenge.BuildConfig
-import com.guilhermecardoso.currencychallenge.data.network.CurrenciesNetworkService
-import com.guilhermecardoso.currencychallenge.data.network.HeaderInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,8 +11,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
     single { createOkHttpClient() }
-    single { createRetrofit(get()) }
-    single { createNetworkApi(get()) }
+    single {
+        createRetrofit(
+            get()
+        )
+    }
+    single {
+        createNetworkApi(
+            get()
+        )
+    }
 }
 
 fun createNetworkApi(retrofit: Retrofit): CurrenciesNetworkService = retrofit.create(CurrenciesNetworkService::class.java)
