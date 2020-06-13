@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Currency Challenge</string>
+    <string name="placeholder_exchange_amount"># ### ###.##</string>
 </resources>
