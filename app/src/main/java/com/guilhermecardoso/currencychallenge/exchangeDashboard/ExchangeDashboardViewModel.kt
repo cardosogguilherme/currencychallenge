@@ -12,8 +12,8 @@ class ExchangeDashboardViewModel(private val exchangeRepository: ExchangeReposit
 
     fun fetchRates(source: String = "USD") {
         viewModelScope.launch {
-            dataLoading.value = true
-            ratesLiveData.postValue(exchangeRepository.getExchangeRates(source)).also { dataLoading.value = false }
+            dataLoading.postValue(true)
+            ratesLiveData.postValue(exchangeRepository.getExchangeRates(source)).also { dataLoading.postValue(false) }
         }
 
     }

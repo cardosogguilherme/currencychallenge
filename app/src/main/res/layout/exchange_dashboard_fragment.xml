@@ -2,9 +2,6 @@
 <layout>
     <data>
         <import type="android.view.View" />
-        <variable
-            name="viewModel"
-            type="com.guilhermecardoso.currencychallenge.exchangeDashboard.ExchangeDashboardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +51,6 @@
         android:id="@+id/loading"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:visibility="@{viewModel.dataLoading.booleanValue() ? View.VISIBLE : View.GONE }"
         style="?android:progressBarStyleLarge"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

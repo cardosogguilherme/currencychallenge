@@ -1,6 +1,5 @@
 package com.guilhermecardoso.currencychallenge
 
-import com.guilhermecardoso.currencychallenge.data.network.CurrenciesNetworkService
 import com.guilhermecardoso.currencychallenge.data.network.networkModule
 import com.guilhermecardoso.currencychallenge.data.repository.ExchangeRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
@@ -11,7 +10,6 @@ import org.junit.Test
 import org.koin.core.context.startKoin
 import org.koin.test.KoinTest
 import org.koin.test.get
-import org.koin.test.inject
 
 class ExchangeRepositoryTest : KoinTest {
 
