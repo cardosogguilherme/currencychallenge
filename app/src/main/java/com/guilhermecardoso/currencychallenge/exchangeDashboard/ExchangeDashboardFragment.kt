@@ -41,6 +41,7 @@ class ExchangeDashboardFragment : Fragment(), AdapterView.OnItemSelectedListener
             if (adapter == null) {
                 adapter =  RateAdapter(it, 0f)
             } else {
+                adapter?.updateRates(it)
                 adapter?.notifyDataSetChanged()
             }
             binding.recyclerRates.adapter = adapter

@@ -35,7 +35,16 @@ class ExchangeRepositoryImpl(
                 .live(source)
                 .await()
             if (result.error != null) {
-                throw Exception(result.error.info)
+                if (result.error.code == 105) { //It's due free tier, we should check locally
+                    // #2.1.1 Firstly, get the source to USD rate
+                    val allFromUSD = exchangeDatabase.exchangeRateDAO().getExchangeRatesFrom("USD")
+                    val rateUsdToSource = allFromUSD.first { it.name.equals(other = source, ignoreCase = true) }.mapToModel()
+                    // #2.1.2 Now, we need to convert each currency in a form of RateUsdToSource * RateUsdToCurrent
+                    allFromUSD.map { it.copy(rate = it.rate / rateUsdToSource.rate, source = source).mapToModel() }.apply { forEach { exchangeDatabase.exchangeRateDAO().insertExchangeRate(it.mapToDB()) } }
+                } else {
+                    // #2.2.1 Throw error otherwise
+                    throw Exception(result.error.info)
+                }
             } else {
                 result.mapRateDTO()
                     .apply { forEach { exchangeDatabase.exchangeRateDAO().insertExchangeRate(it.mapToDB()) } }

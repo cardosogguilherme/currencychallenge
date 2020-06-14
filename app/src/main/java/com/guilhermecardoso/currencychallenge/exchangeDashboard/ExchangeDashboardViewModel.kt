@@ -16,7 +16,7 @@ class ExchangeDashboardViewModel(private val exchangeRepository: ExchangeReposit
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 dataLoading.postValue(true)
-                ratesLiveData.postValue(exchangeRepository.getExchangeRates(source))
+                ratesLiveData.postValue(exchangeRepository.getExchangeRates(source).sortedBy { exchangeRate: ExchangeRate -> exchangeRate.quoteName })
             } catch (exception: Exception) {
                 errorMessage.postValue(exception.message)
             } finally {

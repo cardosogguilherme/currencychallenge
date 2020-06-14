@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.guilhermecardoso.currencychallenge.data.model.ExchangeRate
 import com.guilhermecardoso.currencychallenge.databinding.ItemRateBinding
 
-class RateAdapter(private val rateList: List<ExchangeRate>, var amount: Float): RecyclerView.Adapter<ExchangeRateViewHolder>() {
+class RateAdapter(private var rateList: List<ExchangeRate>, var amount: Float): RecyclerView.Adapter<ExchangeRateViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExchangeRateViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,6 +21,11 @@ class RateAdapter(private val rateList: List<ExchangeRate>, var amount: Float): 
 
     fun updateAmount(amount: Float) {
         this.amount = amount
+        notifyDataSetChanged()
+    }
+
+    fun updateRates(rates: List<ExchangeRate>) {
+        this.rateList = rates
         notifyDataSetChanged()
     }
 }
