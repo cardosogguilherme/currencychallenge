@@ -23,14 +23,6 @@ fun <I, O> mapNullOutputList(input: List<I>, mapSingle: (I) -> O): List<O>? {
     return if (input.isEmpty()) null else input.map { mapSingle(it) }
 }
 
-//fun mapRateDTO(input: NetworkRate): List<ExchangeRate> =
-//    input.quotes.map { ExchangeRate(
-//        timestamp = input.timestamp,
-//        source = input.source,
-//        quoteName = it.key.removePrefix(input.source),
-//        rate = it.value
-//    ) }
-
 fun NetworkRate.mapRateDTO(): List<ExchangeRate> =
     quotes.map { ExchangeRate(
         timestamp = timestamp,

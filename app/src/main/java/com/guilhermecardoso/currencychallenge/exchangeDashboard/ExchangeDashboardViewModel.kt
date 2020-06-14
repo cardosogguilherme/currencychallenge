@@ -7,14 +7,21 @@ import com.guilhermecardoso.currencychallenge.data.model.ExchangeRate
 import com.guilhermecardoso.currencychallenge.data.repository.ExchangeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class ExchangeDashboardViewModel(private val exchangeRepository: ExchangeRepository): BaseViewModel() {
     val ratesLiveData = MutableLiveData<List<ExchangeRate>>()
 
     fun fetchRates(source: String = "USD") {
         viewModelScope.launch(Dispatchers.IO) {
-            dataLoading.postValue(true)
-            ratesLiveData.postValue(exchangeRepository.getExchangeRates(source)).also { dataLoading.postValue(false) }
+            try {
+                dataLoading.postValue(true)
+                ratesLiveData.postValue(exchangeRepository.getExchangeRates(source))
+            } catch (exception: Exception) {
+                errorMessage.postValue(exception.message)
+            } finally {
+                dataLoading.postValue(false)
+            }
         }
 
     }

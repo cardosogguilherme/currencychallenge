@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface CurrenciesNetworkService {
     @GET("/live")
-    fun live(): Deferred<NetworkRate>
+    fun live(@Query("source") source: String): Deferred<NetworkRate>
 
     @GET("/historical")
     fun historical(@Query("date") date: String): Deferred<NetworkRate>

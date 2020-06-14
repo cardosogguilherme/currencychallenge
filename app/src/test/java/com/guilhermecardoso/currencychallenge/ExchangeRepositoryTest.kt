@@ -16,7 +16,7 @@ class ExchangeRepositoryTest : KoinTest {
     @Test
     fun testGetExchangeRates() {
         startKoin { modules(networkModule) }
-        val repo = ExchangeRepositoryImpl(get())
+        val repo = ExchangeRepositoryImpl(get(), get())
 
         CoroutineScope(Dispatchers.IO).launch {
             val exchanges = repo.getExchangeRates("USD")

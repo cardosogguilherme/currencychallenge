@@ -30,11 +30,16 @@ class ExchangeRepositoryImpl(
             timeStamp.time = Calendar.getInstance().time.time
             // #2 Download from web, update database then return
 
-            exchangeService
-                .live()
+            // #2.1 we need to check for errors from the API
+            val result = exchangeService
+                .live(source)
                 .await()
-                .mapRateDTO()
-                .apply { forEach { exchangeDatabase.exchangeRateDAO().insertExchangeRate(it.mapToDB()) } }
+            if (result.error != null) {
+                throw Exception(result.error.info)
+            } else {
+                result.mapRateDTO()
+                    .apply { forEach { exchangeDatabase.exchangeRateDAO().insertExchangeRate(it.mapToDB()) } }
+            }
         } else {
             // #3 Return directly from database
             resultFromDatabase.map { it.mapToModel() }
