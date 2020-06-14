@@ -73,9 +73,9 @@ class ExchangeDashboardFragment : Fragment(), AdapterView.OnItemSelectedListener
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
             AlertDialog.Builder(requireContext())
                 .setCancelable(true)
-                .setTitle("Sorry, something went wrong")
+                .setTitle(getString(R.string.message_sorry_something_went_wrong))
                 .setMessage(it)
-                .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
                 .create().show()
         })
 

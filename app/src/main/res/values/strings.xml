@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Currency Challenge</string>
     <string name="placeholder_exchange_amount"># ### ###.##</string>
+    <string name="message_sorry_something_went_wrong">Sorry, something went wrong</string>
     <string-array name="currencies_list">
         <item>AED</item>
         <item>AFN</item>
