@@ -1,5 +1,6 @@
 package com.guilhermecardoso.currencychallenge.data.mapper
 
+import com.guilhermecardoso.currencychallenge.data.model.DBExchangeRate
 import com.guilhermecardoso.currencychallenge.data.model.ExchangeRate
 import com.guilhermecardoso.currencychallenge.data.model.NetworkRate
 
@@ -37,3 +38,19 @@ fun NetworkRate.mapRateDTO(): List<ExchangeRate> =
         quoteName = it.key.removePrefix(source),
         rate = it.value
     ) }
+
+fun ExchangeRate.mapToDB(): DBExchangeRate =
+    DBExchangeRate(
+        timeStamp = this.timestamp,
+        name = this.quoteName,
+        rate = this.rate,
+        source = this.source
+    )
+
+fun DBExchangeRate.mapToModel(): ExchangeRate =
+    ExchangeRate(
+        timestamp = this.timeStamp,
+        quoteName = this.name,
+        rate = this.rate,
+        source = this.source
+    )

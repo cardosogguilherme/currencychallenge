@@ -1,6 +1,7 @@
 package com.guilhermecardoso.currencychallenge
 
 import android.app.Application
+import com.guilhermecardoso.currencychallenge.data.database.databaseModule
 import com.guilhermecardoso.currencychallenge.data.network.networkModule
 import com.guilhermecardoso.currencychallenge.data.repository.repositoryModule
 import com.guilhermecardoso.currencychallenge.exchangeDashboard.exchangeDashboardModule
@@ -17,7 +18,8 @@ class App : Application() {
             modules(
                 networkModule,
                 exchangeDashboardModule,
-                repositoryModule
+                repositoryModule,
+                databaseModule
             )
         }
     }
