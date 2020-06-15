@@ -34,17 +34,27 @@
             app:layout_constraintEnd_toEndOf="@+id/editTextAmount"
             app:layout_constraintTop_toBottomOf="@+id/editTextAmount" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerRates"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:padding="8dp"
-        android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCurrencies" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCurrencies">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerRates"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:padding="8dp"
+            android:foregroundGravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCurrencies" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/loading"

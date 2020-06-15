@@ -10,7 +10,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 interface ExchangeRepository {
-    suspend fun getExchangeRates(source: String): List<ExchangeRate>
+    suspend fun getExchangeRates(source: String, force: Boolean = false): List<ExchangeRate>
 }
 
 class ExchangeRepositoryImpl(
@@ -20,12 +20,12 @@ class ExchangeRepositoryImpl(
     private var timeStamp = Calendar.getInstance().time
 
 
-    override suspend fun getExchangeRates(source: String): List<ExchangeRate> {
+    override suspend fun getExchangeRates(source: String, force: Boolean): List<ExchangeRate> {
         val resultFromDatabase = exchangeDatabase.exchangeRateDAO().getExchangeRatesFrom(source)
 
         // #1 If there is more than 30 min, we can refresh directly
         // #1.1 However, if we don't have it, we must update anyway
-        return if (TimeUnit.MILLISECONDS.toMinutes(Calendar.getInstance().time.time - timeStamp.time) >= 30 ||
+        return if (force || TimeUnit.MILLISECONDS.toMinutes(Calendar.getInstance().time.time - timeStamp.time) >= 30 ||
             resultFromDatabase.isEmpty()) {
             timeStamp.time = Calendar.getInstance().time.time
             // #2 Download from web, update database then return

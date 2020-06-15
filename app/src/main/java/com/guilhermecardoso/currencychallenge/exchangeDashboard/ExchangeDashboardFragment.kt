@@ -44,6 +44,8 @@ class ExchangeDashboardFragment : Fragment(), AdapterView.OnItemSelectedListener
                 adapter?.updateRates(it)
                 adapter?.notifyDataSetChanged()
             }
+            if (binding.swipeLayout.isRefreshing)
+                binding.swipeLayout.isRefreshing = false
             binding.recyclerRates.adapter = adapter
             binding.recyclerRates.layoutManager = GridLayoutManager(context, 3, VERTICAL, false)
         })
@@ -78,6 +80,10 @@ class ExchangeDashboardFragment : Fragment(), AdapterView.OnItemSelectedListener
                 .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
                 .create().show()
         })
+
+        binding.swipeLayout.setOnRefreshListener {
+            viewModel.fetchRates(force = true, source = binding.spinnerCurrencies.selectedItem.toString())
+        }
 
         return view
     }
